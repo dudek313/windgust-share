@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config_batch version="2.1">
+
+  <batch_system MACH="gadi" type="pbs">
+    <submit_args>
+      <arg flag="-P" name="$PROJECT"/>
+      <arg flag="-l ncpus=" name=" $TOTALPES"/>
+      <arg flag="-l mem=" name=" $TOTALPES*4*1024**3"/>
+      <arg flag="-l storage=" name="gdata/up6+gdata/w42+scratch/up6"/>
+    </submit_args>
+    <directives>
+	    <directive>-l storage=gdata/up6+scratch/up6</directive>
+    </directives>
+    <queues>
+      <queue walltimemax="12:00:00" nodemin="1" nodemax="48" default="true">normal</queue>
+      <queue walltimemax="03:00:00" nodemin="1" nodemax="4">express</queue>
+    </queues>
+  </batch_system>
+
+</config_batch>

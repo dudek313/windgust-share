@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_compilers version="2.0">
+
+<compiler MACH="gadi" COMPILER="intel">
+  <SLIBS>
+    <append> -lnetcdff -lnetcdf </append>
+  </SLIBS>
+</compiler>
+
+</config_compilers>

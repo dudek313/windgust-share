@@ -1,0 +1,81 @@
+
+<config_machines version="2.0">
+    <machine MACH="gadi">
+        <DESC>NCI Gadi</DESC>
+        <NODENAME_REGEX>.*.gadi.nci.org.au</NODENAME_REGEX>
+	<OS>LINUX</OS>
+	<!--PROJECT>$PROJECT</PROJECT>
+        <CHARGE_ACCOUNT>$PROJECT</CHARGE_ACCOUNT-->
+
+        <COMPILERS>intel</COMPILERS>
+        <MPILIBS>openmpi,intelmpi</MPILIBS>
+        <!--CIME_OUTPUT_ROOT>/scratch/$PROJECT/$USER/cesm2</CIME_OUTPUT_ROOT>
+        <DIN_LOC_ROOT>/scratch/$PROJECT/$USER/cesm2/inputs</DIN_LOC_ROOT>
+        <DOUT_S_ROOT>$CIME_OUTPUT_ROOT/archive/$CASE</DOUT_S_ROOT>
+        <BASELINE_ROOT>/scratch/$PROJECT/$USER/cesm2/baseline</BASELINE_ROOT>
+	<CCSM_CPRNC>/scratch/$PROJECT/$USER/cesm2/cime/tools/cprnc/cprnc</CCSM_CPRNC-->
+
+	<!--CIME_OUTPUT_ROOT>/g/data/$PROJECT/$USER/cesm/2.2.0/scratch/$CASE/exe</CIME_OUTPUT_ROOT-->
+	<!--CIME_OUTPUT_ROOT>/scratch/up6/$USER/cesm/2.2.0/runs/$CASE/exe</CIME_OUTPUT_ROOT-->
+	<CIME_OUTPUT_ROOT>/scratch/up6/daf561/cesm/2.2.0/runs/</CIME_OUTPUT_ROOT>
+	<DIN_LOC_ROOT>/g/data/up6/daf561/cesm/inputdata/</DIN_LOC_ROOT>
+	<DOUT_S_ROOT>/g/data/up6/daf561/cesm/2.2.0/archive/$CASE</DOUT_S_ROOT>
+	<BASELINE_ROOT>/g/data/up6/daf561/cesm/2.2.0/src/cesm_baseline</BASELINE_ROOT>
+	<CCSM_CPRNC>/g/data/up6/daf561/cesm/2.2.0/src/tools/cprnc</CCSM_CPRNC>
+	<GMAKE>gmake --output-sync</GMAKE>
+	<GMAKE_J>8</GMAKE_J>
+	
+	<BATCH_SYSTEM>pbs</BATCH_SYSTEM>
+        <SUPPORTED_BY>UNSUPPORTED</SUPPORTED_BY>
+        <MAX_TASKS_PER_NODE>48</MAX_TASKS_PER_NODE>
+	<MAX_MPITASKS_PER_NODE>48</MAX_MPITASKS_PER_NODE>
+	<PROJECT_REQUIRED>TRUE</PROJECT_REQUIRED>
+
+        <mpirun mpilib="openmpi">
+            <executable>mpirun</executable>
+            <arguments>
+                <arg name="num_tasks">-n {{ total_tasks }}</arg>
+            </arguments>
+        </mpirun>
+        <module_system type="module">
+            <init_path lang="perl">/opt/Modules/v4.3.0/init/perl.pm</init_path>
+	    <init_path lang="python">/opt/Modules/v4.3.0/init/python.py</init_path>
+	    <init_path lang="sh">/opt/Modules/v4.3.0/init/sh</init_path>
+	    <init_path lang="csh">/opt/Modules/v4.3.0/init/csh</init_path>
+	    <cmd_path lang="sh">module</cmd_path>
+            <cmd_path lang="csh">module</cmd_path>
+            <cmd_path lang="python">/opt/Modules/v4.3.0/libexec/modulecmd.tcl python</cmd_path>
+            <cmd_path lang="perl">/opt/Modules/v4.3.0/libexec/modulecmd.tcl perl</cmd_path>
+            <modules><command name="purge"/></modules>
+            <modules>
+                <command name="load">intel-mkl/2019.3.199</command>
+		<command name="load">python3/3.7.4</command>
+                <command name="load">python3-as-python</command>
+                <command name="load">netcdf/4.7.3</command>
+		<command name="load">openmpi/4.0.2</command>
+		<command name="load">hdf5/1.10.5</command>
+                <command name="load">cmake/3.16.2</command>
+                <command name="load">pbs</command>
+		<command name="load">pnetcdf/1.11.2</command>
+            </modules>
+            <modules compiler="intel">
+		<command name="load">intel-compiler/2019.3.199</command>
+            </modules>
+            <!--modules compiler="intel" mpilib="openmpi">
+                <command name="load">openmpi/4.0.2</command>
+            </modules-->
+            <!--modules mpilib="intelmpi">
+                <command name="load">intel-mpi/2020.1.217</command>
+            </modules-->
+        </module_system>
+        <environment_variables>
+            <env name="NETCDF_PATH">/g/data/up6/daf561/cesm/2.2.0/deps/netcdf/</env>
+            <!--env name="NETCDF_PATH">/apps/netcdf/4.7.3</env>
+            <env name="NETCDF_ROOT">/apps/netcdf/4.7.3</env>
+            <env name="NetCDF_Fortran_LIBRARY">netcdff</env>
+	    <env name="NetCDF_Fortran_INCLUDE_DIR">/apps/netcdf/4.7.3/include/Intel/</env>
+            <env name="NetCDF_C_INCLUDE_DIR">/apps/netcdf/4.7.3/include/</env>
+            <env name="NetCDF_C_LIBRARY">netcdf</env-->
+        </environment_variables>
+    </machine>
+</config_machines>
